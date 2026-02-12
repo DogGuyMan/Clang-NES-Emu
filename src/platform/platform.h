@@ -9,11 +9,12 @@
 #include "input/input.h"
 #include <SDL.h>
 
-typedef struct {
-    SDL_Window       *window;
-    SDL_Renderer     *renderer;
-    SDL_Texture      *texture;
-    SDL_AudioDeviceID audio_device;
+typedef struct
+{
+	SDL_Window *window;
+	SDL_Renderer *renderer;
+	SDL_Texture *texture;
+	SDL_AudioDeviceID audio_device;
 } Platform;
 
 bool platform_init(Platform *p, int scale);

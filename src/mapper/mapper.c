@@ -8,9 +8,14 @@
 /* Forward declarations for mapper constructors */
 Mapper *mapper_000_create(ROM *rom);
 
-Mapper *mapper_create(ROM *rom) {
-    switch (rom->mapper_id) {
-        case 0:  return mapper_000_create(rom);
-        default: return NULL;
-    }
+Mapper *mapper_create(ROM *rom)
+{
+	int mapper_id = 0;
+	switch (mapper_id)
+	{
+	case 0:
+		return mapper_000_create(rom);
+	default:
+		return NULL;
+	}
 }

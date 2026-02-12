@@ -9,20 +9,21 @@
 
 struct Bus;
 
-typedef struct CPU {
-    u8   a, x, y, sp, status;
-    u16  pc;
-    u64  cycles;
-    struct Bus *bus;
+typedef struct CPU
+{
+	u8 a, x, y, sp, status;
+	u16 pc;
+	u64 cycles;
+	struct Bus *bus;
 
-    bool nmi_pending;
-    bool irq_pending;
+	bool nmi_pending;
+	bool irq_pending;
 
-    u8   opcode;
-    u16  addr_abs;
-    u16  addr_rel;
-    u8   fetched;
-    u8   remaining;
+	u8 opcode;
+	u16 addr_abs;
+	u16 addr_rel;
+	u8 fetched;
+	u8 remaining;
 } CPU;
 
 void cpu_init(CPU *cpu, struct Bus *bus);
