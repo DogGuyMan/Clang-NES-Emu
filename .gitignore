@@ -1,0 +1,19 @@
+# Build directories
+build_project/
+build*/
+
+# Object files and libraries
+*.o
+*.a
+*.dylib
+*.so
+
+# macOS
+.DS_Store
+
+# vcpkg local files
+vcpkg_installed/
+
+# Doxygen output
+doc/html/
+doc/latex/
