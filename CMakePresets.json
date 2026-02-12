@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "debug",
+            "displayName": "Debug (vcpkg)",
+            "description": "Debug build with vcpkg toolchain and sanitizers",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build_project",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release (vcpkg)",
+            "description": "Release build with vcpkg toolchain",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build_project",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+            }
+        }
+    ]
+}

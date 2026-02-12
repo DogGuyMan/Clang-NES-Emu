@@ -1,0 +1,26 @@
+# Doxyfile.in — configured by CMake
+
+PROJECT_NAME           = "NES Emulator"
+PROJECT_NUMBER         = @PROJECT_VERSION@
+PROJECT_BRIEF          = "NES emulator written in C"
+
+INPUT                  = @DOXYGEN_INPUT_DIR@
+OUTPUT_DIRECTORY       = @DOXYGEN_OUTPUT_DIR@
+
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.c
+
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = YES
+
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+
+OPTIMIZE_OUTPUT_FOR_C  = YES
+
+QUIET                  = YES
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
