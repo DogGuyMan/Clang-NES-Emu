@@ -21,3 +21,5 @@ add_test(
     COMMAND test_cpu "${CMAKE_CURRENT_SOURCE_DIR}/roms/nestest.nes"
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+add_subdirectory(diagnostics)
