@@ -7,11 +7,11 @@
 
 #include "common/types.h"
 
-enum NametableArrangementType
-{
-	HORIZONTAL = 0, // 수직 배치 & 수평 미러링
-	VERTICAL = 1,	// 수평 배치 & 수직 미러링
-};
+// 수직 배치 & 수평 미러링
+#define NAMETABLE_ARRANGEMENT_HORIZONTAL_FLAG 0
+
+// 수평 배치 & 수직 미러링
+#define NAMETABLE_ARRANGEMENT_VERTICAL_FLAG 1
 
 typedef union
 {
