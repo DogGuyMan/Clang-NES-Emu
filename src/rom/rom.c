@@ -30,9 +30,10 @@ static const ROM EMPTY_ROM_TEMPLATE = {
     .trainer_rom_ptr = NULL,
     .prg_rom_ptr = NULL,
     .chr_rom_ptr = NULL,
+    .rom_free = rom_free,
 };
 
-ROM *rom_create()
+ROM *rom_create(void)
 {
 	ROM *temp_rom = malloc(sizeof(ROM));
 	if (temp_rom == NULL)

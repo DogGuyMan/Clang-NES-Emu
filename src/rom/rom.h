@@ -48,7 +48,7 @@ typedef u8 FlagsD;
 typedef u8 FlagsE;
 typedef u8 FlagsF;
 
-typedef struct
+typedef struct ROMHeader
 {
 	u8 magic_numbers[4];	   // 0-3
 	u8 prg_rom_size;	   // 4
@@ -69,15 +69,16 @@ typedef struct
 #define ROM_TRAINER_SIZE 512
 #define ROM_PRG_BANK_SIZE (1 << 14)
 #define ROM_CHR_BANK_SIZE (1 << 13)
-typedef struct
+typedef struct ROM
 {
-	ROMHeader header;
+	struct ROMHeader header;
 	u8 mapper_id;
 	u8 *trainer_rom_ptr;
 	u8 *prg_rom_ptr;
 	u8 *chr_rom_ptr;
+	void (*const rom_free)(struct ROM *this);
 } ROM;
 
-bool rom_load(ROM *rom, const char *filepath);
-void rom_free(ROM *rom);
+bool rom_load(struct ROM *rom, const char *filepath);
+void rom_free(struct ROM *rom);
 #endif /* NES_ROM_H */

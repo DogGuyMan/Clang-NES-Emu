@@ -8,6 +8,8 @@
 #include "common/types.h"
 #include "rom/rom.h"
 
+#define GET_MAPPER_STATE(TYPE, MAPPER_PTR) ((TYPE *)(MAPPER_PTR)->state)
+
 typedef struct Mapper
 {
 	u8 id;
