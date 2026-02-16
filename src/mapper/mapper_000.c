@@ -23,11 +23,13 @@
 
 // 0011 1111 1111 1111
 // 01XX XXXX XXXX XXXX -> 00XX XXXX XXXX XXXX
-#define PRG_16K_MIRROR_FLAG 0x3FFF
+#define PRG_16K_MIRROR_MASK 0x3FFF
 
 // 0111 1111 1111 1111
 // 01XX XXXX XXXX XXXX -> 01XX XXXX XXXX XXXX
-#define PRG_32K_MIRROR_FLAG 0x7FFF
+#define PRG_32K_MIRROR_MASK 0x7FFF
+
+#define PPU_ADDRESS_EXIT 0x2000
 
 typedef struct Mapper000State Mapper000State;
 void mapper_free(Mapper *m);
@@ -188,11 +190,9 @@ static u8 cpu_read(Mapper *m, u16 addr)
 
 	Mapper000State *state = GET_MAPPER_STATE(Mapper000State, m);
 	if (!state->is_32kb)
-		offseted_addr &= PRG_16K_MIRROR_FLAG;
+		offseted_addr &= PRG_16K_MIRROR_MASK;
 	return *(state->prg_rom_ptr + offseted_addr);
 }
-
-#define PPU_ADDRESS_END 0x1FFF
 
 static void cpu_write(Mapper *m, u16 addr, u8 val)
 {
@@ -201,7 +201,7 @@ static void cpu_write(Mapper *m, u16 addr, u8 val)
 
 static u8 ppu_read(Mapper *m, u16 addr)
 {
-	if (PPU_ADDRESS_END < addr)
+	if (PPU_ADDRESS_EXIT < addr)
 		return 0;
 
 	Mapper000State *state = GET_MAPPER_STATE(Mapper000State, m);
@@ -210,7 +210,7 @@ static u8 ppu_read(Mapper *m, u16 addr)
 
 static void ppu_write(Mapper *m, u16 addr, u8 val) // ! TODO
 {
-	if (PPU_ADDRESS_END < addr)
+	if (PPU_ADDRESS_EXIT <= addr)
 		return;
 	Mapper000State *state = GET_MAPPER_STATE(Mapper000State, m);
 	if (state->is_chr_ram)

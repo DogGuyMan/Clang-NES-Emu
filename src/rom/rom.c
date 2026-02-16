@@ -125,15 +125,16 @@ bool rom_load(ROM *rom, const char *filepath)
 
 	// 6. PRG ROM 데이터 할당 및 읽기 (단위 → 바이트 변환)
 	{
-		int prg_bank_cnt = header_ptr->prg_rom_size;
-		rom->prg_rom_ptr = malloc(ROM_PRG_BANK_SIZE * prg_bank_cnt);
+		u64 prg_bank_cnt = header_ptr->prg_rom_size;
+		u64 prg_room_size = ROM_PRG_BANK_SIZE * prg_bank_cnt;
+		rom->prg_rom_ptr = malloc(prg_room_size);
 		if (rom->prg_rom_ptr == NULL)
 		{
 			log_msg(LOG_ERROR, "PRG 자원 동적할당 실패");
 			is_load_success = false;
 			goto cleanup;
 		}
-		u64 read_count = fread(rom->prg_rom_ptr, ROM_PRG_BANK_SIZE * prg_bank_cnt, 1UL, ROM_FILE);
+		u64 read_count = fread(rom->prg_rom_ptr, prg_room_size, 1UL, ROM_FILE);
 		if (read_count <= 0)
 		{
 			is_load_success = false;
@@ -144,7 +145,8 @@ bool rom_load(ROM *rom, const char *filepath)
 
 	if (header_ptr->chr_rom_size > 0)
 	{
-		int chr_bank_cnt = header_ptr->chr_rom_size;
+		u64 chr_bank_cnt = header_ptr->chr_rom_size;
+		u64 chr_rom_size = (ROM_CHR_BANK_SIZE * chr_bank_cnt);
 		rom->chr_rom_ptr = malloc(ROM_CHR_BANK_SIZE * chr_bank_cnt);
 		if (rom->chr_rom_ptr == NULL)
 		{
@@ -153,7 +155,7 @@ bool rom_load(ROM *rom, const char *filepath)
 			goto cleanup;
 		}
 
-		u64 read_count = fread(rom->chr_rom_ptr, ROM_CHR_BANK_SIZE * chr_bank_cnt, 1UL, ROM_FILE);
+		u64 read_count = fread(rom->chr_rom_ptr, chr_rom_size, 1UL, ROM_FILE);
 		if (read_count <= 0)
 		{
 			is_load_success = false;
