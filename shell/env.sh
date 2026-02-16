@@ -4,19 +4,18 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-BUILD_DIR="${PROJECT_DIR}/build_project"
+BUILD_DIR="${PROJECT_DIR}/build_$(uname -s)"
 
-# vcpkg
-VCPKG_ROOT="${VCPKG_ROOT:-$HOME/vcpkg}"
-TOOLCHAIN="${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+# vcpkg — set default if not already defined, export for CMake Presets
+export VCPKG_ROOT="${VCPKG_ROOT:-$HOME/vcpkg}"
 
 # Parallel jobs
 JOBS="$(sysctl -n hw.ncpu 2>/dev/null || nproc 2>/dev/null || echo 4)"
 
 # Validation
 validate_vcpkg() {
-    if [ ! -f "${TOOLCHAIN}" ]; then
-        echo "Error: vcpkg toolchain not found at ${TOOLCHAIN}"
+    if [ ! -d "${VCPKG_ROOT}" ]; then
+        echo "Error: VCPKG_ROOT not found at ${VCPKG_ROOT}"
         echo "Set VCPKG_ROOT or install vcpkg at ~/vcpkg"
         exit 1
     fi

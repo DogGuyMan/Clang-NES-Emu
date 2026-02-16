@@ -5,9 +5,9 @@ set -e
 source "$(dirname "$0")/env.sh"
 
 if [ ! -f "${BUILD_DIR}/CMakeCache.txt" ]; then
-    "${SCRIPT_DIR}/configure.sh" Release
+    "${SCRIPT_DIR}/configure.sh" release
 fi
 
 echo "=== Generating docs ==="
-cmake --build "${BUILD_DIR}" --target doxygen
+cmake --build --preset release --target doxygen
 echo "=== Docs generated at ${PROJECT_DIR}/doc/html/ ==="

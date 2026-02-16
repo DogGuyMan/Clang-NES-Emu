@@ -1,16 +1,13 @@
 #!/bin/bash
-# configure.sh — CMake configure + vcpkg install.
-# Usage: ./shell/configure.sh [Release|Debug]
+# configure.sh — CMake configure via presets.
+# Usage: ./shell/configure.sh [release|debug]
 set -e
 source "$(dirname "$0")/env.sh"
 validate_vcpkg
 
-BUILD_TYPE="${1:-Release}"
+PRESET="${1:-release}"
 
-echo "=== Configuring (${BUILD_TYPE}) ==="
-cmake -B "${BUILD_DIR}" -S "${PROJECT_DIR}" \
-      -G "Unix Makefiles" \
-      -DCMAKE_BUILD_TYPE="${BUILD_TYPE}" \
-      -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN}"
+echo "=== Configuring (${PRESET}) ==="
+cmake --preset "${PRESET}" -S "${PROJECT_DIR}"
 
 echo "=== Configure done ==="

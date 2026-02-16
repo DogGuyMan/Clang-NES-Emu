@@ -1,21 +1,21 @@
 #!/bin/bash
-# test.sh — Build (Debug) and run tests.
+# test.sh — Build (Debug) and run tests via presets.
 # Usage: ./shell/test.sh [test_name]
 #   ./shell/test.sh           — run all tests
 #   ./shell/test.sh test_cpu  — run specific test
 set -e
 source "$(dirname "$0")/env.sh"
 
-# Always use Debug for tests (sanitizers enabled)
+# Always use debug preset for tests
 if [ ! -f "${BUILD_DIR}/CMakeCache.txt" ]; then
-    "${SCRIPT_DIR}/configure.sh" Debug
+    "${SCRIPT_DIR}/configure.sh" debug
 fi
 
-cmake --build "${BUILD_DIR}" -j"${JOBS}"
+cmake --build --preset debug -j"${JOBS}"
 
 echo "=== Running tests ==="
 if [ -n "$1" ]; then
-    cd "${BUILD_DIR}" && ctest -R "$1" --output-on-failure
+    ctest --preset debug -R "$1"
 else
-    cd "${BUILD_DIR}" && ctest --output-on-failure
+    ctest --preset debug
 fi

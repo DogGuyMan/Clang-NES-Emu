@@ -18,21 +18,8 @@
 7. mapper_000_create 구현
 8. mapper.c의 mapper_create 연결
 */
-// 1000 0000 0000 0000
-#define PRG_ADDRESS_OFFSET 0x8000
-
-// 0011 1111 1111 1111
-// 01XX XXXX XXXX XXXX -> 00XX XXXX XXXX XXXX
-#define PRG_16K_MIRROR_MASK 0x3FFF
-
-// 0111 1111 1111 1111
-// 01XX XXXX XXXX XXXX -> 01XX XXXX XXXX XXXX
-#define PRG_32K_MIRROR_MASK 0x7FFF
-
-#define PPU_ADDRESS_EXIT 0x2000
 
 typedef struct Mapper000State Mapper000State;
-void mapper_free(Mapper *m);
 static void *state_create(ROM *rom);
 static void state_free(Mapper000State *this);
 static u8 cpu_read(Mapper *m, u16 addr);

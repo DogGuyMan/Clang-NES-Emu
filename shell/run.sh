@@ -3,9 +3,9 @@
 # Usage: ./shell/run.sh <command> [args...]
 #
 # Commands:
-#   configure [Release|Debug]   — CMake configure + vcpkg install
-#   build     [Release|Debug]   — Build (auto-configures if needed)
-#   test      [test_name]       — Build (Debug) + run tests
+#   configure [release|debug]   — CMake configure via preset
+#   build     [release|debug]   — Build via preset (auto-configures if needed)
+#   test      [test_name]       — Build (debug) + run tests
 #   clean                       — Remove build directory
 #   docs                        — Generate Doxygen documentation
 #   help                        — Show this message
@@ -17,9 +17,9 @@ usage() {
     echo "Usage: $0 <command> [args...]"
     echo ""
     echo "Commands:"
-    echo "  configure [Release|Debug]   — CMake configure + vcpkg install"
-    echo "  build     [Release|Debug]   — Build (auto-configures if needed)"
-    echo "  test      [test_name]       — Build (Debug) + run tests"
+    echo "  configure [release|debug]   — CMake configure via preset"
+    echo "  build     [release|debug]   — Build via preset (auto-configures if needed)"
+    echo "  test      [test_name]       — Build (debug) + run tests"
     echo "  clean                       — Remove build directory"
     echo "  docs                        — Generate Doxygen documentation"
     echo "  help                        — Show this message"

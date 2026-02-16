@@ -8,20 +8,6 @@
 #include "input/input.h"
 #include "ppu/ppu.h"
 
-// 0000 0111 1111 1111
-// 0000 1XXX XXXX XXXX
-#define CPU_INTERNAL_RAM_MIRROR_MASK (0x0800 - 1)
-
-// 0000 0000 0000 0111
-#define CPU_PPU_REGISTER_MIRROR_MASK (0x0008 - 1)
-
-#define CPU_RAM_ADDRESS_BARRIER 0x2000
-#define CPU_PPU_REGISTER_ADDRESS_BARRIER 0x4000
-#define CPU_OAM_DMA_ADDRESS 0x4014
-#define CPU_CONTROLLERS_FIRST_ADDRESS 0x4016
-#define CPU_CONTROLLERS_SECOND_ADDRESS 0x4017
-#define CPU_MAPPER_ADDRESS 0x4020
-
 #pragma region Internal Ram
 
 static inline bool bus_cpu_internal_ram_predicate(u16 addr)
