@@ -160,17 +160,15 @@ u8 bus_cpu_read(Bus *bus, u16 addr)
 void bus_cpu_write(Bus *bus, u16 addr, u8 val)
 {
 	if (bus_cpu_internal_ram_predicate(addr))
-		return bus_cpu_internal_ram_write(bus, addr, val);
-	if (bus_cpu_ppu_registers_predicate(addr))
-		return bus_cpu_ppu_registers_write(bus, addr, val);
-	if (bus_cpu_oam_dma_predicate(addr))
-		return bus_cpu_oam_dma_write(bus, addr, val);
-	if (bus_cpu_apu_register_write_predicate(addr))
-		return bus_cpu_apu_registers_write(bus, addr, val);
-	if (0x4018 <= addr && addr <= 0x401F) // Open Bus 처리
-		return;
-	if (bus_cpu_controllers_write_predicate(addr))
-		return bus_cpu_controllers_write(bus, addr, val);
-	if (bus_cpu_mapper_predicate(addr))
-		return bus_cpu_mapper_write(bus, addr, val);
+		bus_cpu_internal_ram_write(bus, addr, val);
+	else if (bus_cpu_ppu_registers_predicate(addr))
+		bus_cpu_ppu_registers_write(bus, addr, val);
+	else if (bus_cpu_oam_dma_predicate(addr))
+		bus_cpu_oam_dma_write(bus, addr, val);
+	else if (bus_cpu_apu_register_write_predicate(addr))
+		bus_cpu_apu_registers_write(bus, addr, val);
+	else if (0x4018 <= addr && addr <= 0x401F) // Open Bus 처리
+		bus_cpu_controllers_write(bus, addr, val);
+	else if (bus_cpu_mapper_predicate(addr))
+		bus_cpu_mapper_write(bus, addr, val);
 }
