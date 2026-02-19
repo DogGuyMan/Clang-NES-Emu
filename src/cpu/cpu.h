@@ -9,9 +9,26 @@
 
 struct Bus;
 
+typedef union
+{
+	u8 raw;
+	struct
+	{
+		u8 C : 1;
+		u8 Z : 1;
+		u8 I : 1;
+		u8 D : 1;
+		u8 B : 1;
+		u8 dash : 1;
+		u8 V : 1;
+		u8 N : 1;
+	} flags;
+} Status;
+
 typedef struct CPU
 {
-	u8 a, x, y, sp, status;
+	u8 a, x, y, sp;
+	Status status;
 	u16 pc;
 	u64 cycles;
 	struct Bus *bus;
